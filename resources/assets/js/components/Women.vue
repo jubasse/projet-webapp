@@ -1,6 +1,6 @@
 <template>
     <b-container>
-        <h1 class="text-center">Women</h1>
+        <h1 class="text-center">Les femmes</h1>
         <b-row v-for="(women, index) in chunkedWoman" :key="index">
             <b-col v-for="(woman, key) in women" :key="woman.id">
                 <b-card
