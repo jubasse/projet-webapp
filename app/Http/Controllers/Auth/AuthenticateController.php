@@ -2,6 +2,7 @@
 
 namespace Model\Http\Controllers\Auth;
 
+use Carbon\Carbon;
 use JWTAuth;
 use Illuminate\Http\Request;
 use Model\Http\Controllers\Controller;
@@ -19,11 +20,16 @@ class AuthenticateController extends Controller
     {
         $credentials = $request->only(['email', 'password']);
         try {
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'Invalid Credentials'], 401);
-            }
+            $token = JWTAuth::attempt($credentials, [
+                'exp' => Carbon::now()->addWeek()->timestamp
+            ]);
         } catch (JWTException $e) {
             return response()->json(['error' => 'Could not create token'], 500);
+        }
+        if (!$token) {
+            return response()->json([
+                'error' => 'Could not authenticate',
+            ], 401);
         }
         return response()->json(compact('token'));
     }

@@ -11,4 +11,5 @@
 |
 */
 Route::view('/', 'homepage');
+Route::get('user', 'Auth\AuthenticateController@getAuthenticatedUser')->name('auth.user');
 Route::post('auth', 'Auth\AuthenticateController@authenticate')->name('authenticate');
