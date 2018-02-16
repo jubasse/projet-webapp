@@ -1,13 +1,12 @@
 <template>
-    <div class="container">
-        <h1 class="text-center">App</h1>
+    <div>
+        <app-header></app-header>
+        <router-view keep-alive></router-view>
     </div>
 </template>
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
+
     }
 </script>
